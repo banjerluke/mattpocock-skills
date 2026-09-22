@@ -41,6 +41,12 @@ The edges are the point of the artifact. They read two ways depending on the tra
 
 The edges live in the ticket either way. The medium only decides whether anything can act on them in parallel. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
 
+## Each ticket carries its own spec
+
+The session that picks a ticket up has never seen the spec and should not have to fetch it. So each ticket copies forward, verbatim, the spec content that binds it: the implementation and testing decisions tagged with its behaviour numbers go under **Decisions that bind this ticket**, and the spec's beliefs about the codebase for those behaviours go under **Believed context**, keeping the rule that beliefs are verified before use. Verbatim is the point: a paraphrase is where a decision gets softened or a belief gets promoted into a fact.
+
+This depends on [to-spec](https://aihero.dev/skills-to-spec) having numbered its decisions by behaviour. Off a plan or a bare conversation, the same two sections get written by hand from what was decided and what was assumed.
+
 ## The wide-refactor exception
 
 One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites and no vertical slice can land green.
@@ -85,7 +91,7 @@ The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is
 - The list comes back to you numbered, with a "Blocked by" line on each, before anything is published.
 - The ticket at the top has no blockers and can be started immediately.
 - Nothing in a ticket body is a file path or a line number, except a snippet a prototype produced.
-- Each ticket reads like something a fresh session could finish without you in the room.
+- Each ticket reads like something a fresh session could finish without you in the room, and without opening the spec: the decisions it needs are in the ticket body.
 - Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
 
 ## Where it fits
