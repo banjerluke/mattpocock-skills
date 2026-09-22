@@ -28,21 +28,13 @@ The problem that the user is facing, from the user's perspective.
 
 The solution to the problem, from the user's perspective.
 
-## User Stories
+## Behaviours
 
-A LONG, numbered list of user stories. Each user story should be in the format of:
-
-1. As an <actor>, I want a <feature>, so that <benefit>
-
-<user-story-example>
-1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
-</user-story-example>
-
-This list of user stories should be extremely extensive and cover all aspects of the feature.
+A numbered list of the behaviours that must hold at the seams agreed above: what a user, caller, or test does at the seam, and what it observes. Cover the feature's real surface, including the error and edge cases that were discussed. Each entry is checkable: a test or a demo could confirm it.
 
 ## Implementation Decisions
 
-A list of implementation decisions that were made. This can include:
+A list of implementation decisions that were made. Anything behind a seam that a behaviour above depends on but cannot observe belongs here. This can include:
 
 - The modules that will be built/modified
 - The interfaces of those modules that will be modified
