@@ -33,6 +33,12 @@ Before it writes a word, `to-spec` sketches the **seams** the feature will be te
 
 Those agreed seams then travel. [tdd](https://aihero.dev/skills-tdd) works only at pre-agreed seams, and [code-review](https://aihero.dev/skills-code-review) reviews the diff against the spec, so a seam nobody agreed to shows up as a review finding. The binding is indirect: it runs through this document, which is exactly why the seam conversation is worth taking seriously here rather than deferring it to implementation.
 
+## Decisions are binding; beliefs are checked
+
+Every implementation decision opens with the number of the behaviour it serves, so a ticket cut from one behaviour can pick up exactly the decisions that bind it and nothing else. The decisions are unhedged: an implementer honours them.
+
+What the spec *believes* about the codebase is a different kind of statement, and it lives in its own **Believed Context** section: where a piece of state currently sits, what causes a present-day behaviour, which module already owns a concern. Those are verified against the code before anyone designs around them, and reported back when wrong. Keeping them out of the decisions list matters because a wrong belief filed as a settled decision sends the implementer off reconciling the spec with the code instead of simply correcting it. A long Believed Context section is a tell that the spec was written without reading the code.
+
 ## Common questions
 
 **Where did `/to-prd` go?**
@@ -68,6 +74,7 @@ Very large specs can outgrow what a tracker issue will serve back cleanly, and t
 - It puts the seams to you before it writes, and proposes as few as it can get away with.
 - It comes back in your project's nouns, not generic product-management boilerplate.
 - Every decision in it is one you can remember making. Nothing was invented to fill a section.
+- Each decision names the behaviour it serves, and the things you merely believe about the code are in their own section rather than dressed as decisions.
 - The out-of-scope section has real things in it: the things you refused are usually the most useful lines on the page.
 
 ## Where it fits

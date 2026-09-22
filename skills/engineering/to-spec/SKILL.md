@@ -44,6 +44,15 @@ A list of implementation decisions that were made. Anything behind a seam that a
 - API contracts
 - Specific interactions
 
+Every decision is binding and unhedged. Open each one with the behaviour number(s) it serves in bold, so a ticket cut from one behaviour can pick up exactly the decisions that bind it:
+
+- **Behaviour 7.** Swipe travel is stage width plus the shortfall below the minimum gap, so charts never pass closer than that gap mid-slide.
+- **Behaviours 3, 11.** Overlays suppress gestures only through the overlay controller's flag; no DOM probing.
+
+A decision that serves several behaviours lists them all. A decision that serves none is either a behaviour that was never written down (add it above) or not a decision.
+
+Decisions say what will be true when the work lands. What you currently believe about the codebase (where something lives, why it behaves the way it does today) is not a decision; it goes under Believed Context below. Keeping the two apart matters because an implementer must honour a decision but should check a belief.
+
 Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
 
 Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
@@ -59,6 +68,12 @@ A list of testing decisions that were made. Include:
 ## Out of Scope
 
 A description of the things that are out of scope for this spec.
+
+## Believed Context
+
+Factual claims about the codebase that the decisions above rest on: where a piece of state lives, what a current behaviour is caused by, which module already owns a concern. Tag each with the behaviour number(s) it informs, the same way as the decisions. These are beliefs, not decisions: an implementer verifies them against the code before designing around them, and reports back when one is wrong rather than trying to reconcile the spec with it.
+
+Keep this section short. If it is long, the spec was written without reading the code, and the beliefs should be checked now rather than left for every implementer to check later. Omit the section entirely when there is nothing in it.
 
 ## Further Notes
 
