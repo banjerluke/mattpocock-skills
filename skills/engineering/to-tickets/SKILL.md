@@ -64,6 +64,13 @@ Publish the approved tickets. **How** depends on the tracker `/setup-matt-pocock
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
 
+**Each ticket is self-contained.** The session that picks it up has never seen the spec and should not need to fetch it. When the source is a spec written by `to-spec`, copy forward the spec content that binds the ticket:
+
+- Under **Decisions that bind this ticket**: every Implementation Decision and Testing Decision tagged with one of the ticket's behaviour numbers, verbatim. These are binding; the implementer honours them.
+- Under **Believed context**: every Believed Context entry tagged with one of the ticket's behaviour numbers, verbatim, keeping the section's standing rule that these are verified before use and reported back when wrong.
+
+Copy, do not summarise: the point is that the ticket carries the spec's own words, so nothing is lost or softened in transit. A behaviour number that no decision or belief references contributes nothing to these sections, which is fine. Omit either heading when it would be empty. When the source is a plan or a conversation rather than a `to-spec` spec, write the equivalent sections by hand from what was decided and what was assumed.
+
 Do NOT close or modify any parent issue.
 
 <local-ticket-template>
@@ -78,6 +85,10 @@ Do NOT close or modify any parent issue.
 
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
+
+**Decisions that bind this ticket:** the spec's Implementation and Testing Decisions for this ticket's behaviours, copied verbatim. Omit when empty.
+
+**Believed context:** the spec's Believed Context entries for this ticket's behaviours, copied verbatim; verify before relying on them. Omit when empty.
 
 </local-ticket-template>
 
@@ -95,6 +106,14 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 - [ ] Criterion 1
 - [ ] Criterion 2
+
+## Decisions that bind this ticket
+
+The spec's Implementation and Testing Decisions for this ticket's behaviours, copied verbatim. Omit the section when empty.
+
+## Believed context
+
+The spec's Believed Context entries for this ticket's behaviours, copied verbatim. Verify these against the code before designing around them, and report back when one is wrong. Omit the section when empty.
 
 ## Blocked by
 
