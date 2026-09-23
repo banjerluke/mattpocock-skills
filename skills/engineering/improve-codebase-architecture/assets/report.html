@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Architecture review for {{repo name}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Tokens. Colour comes from here and nowhere else: `bg-card`, `text-muted`,
+         fill="var(--bad)". Both themes live in this block, so a report written in
+         tokens is already correct in dark. */
+      :root {
+        --page: #fafaf9;
+        --card: #ffffff;
+        --panel: #f5f5f4;
+        --line: #e2e8f0;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --deep: #0f172a;
+        --deep-edge: #0f172a;
+        --good: #059669;
+        --good-bg: #ecfdf5;
+        --warn: #b45309;
+        --warn-bg: #fffbeb;
+        --bad: #dc2626;
+        --bad-bg: #fef2f2;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --page: #0b1017;
+          --card: #131b26;
+          --panel: #0a1018;
+          --line: #263243;
+          --ink: #e2e8f0;
+          --muted: #94a3b8;
+          --deep: #0a1220;
+          --deep-edge: #4f46e5;
+          --good: #6ee7b7;
+          --good-bg: #052e22;
+          --warn: #fcd34d;
+          --warn-bg: #3b2a09;
+          --bad: #fca5a5;
+          --bad-bg: #3d1418;
+        }
+      }
+
+      /* Small custom layer for things Tailwind doesn't cover cleanly:
+         dashed seam lines, hand-drawn-feeling arrow heads, etc. */
+      .seam { stroke: var(--muted); stroke-dasharray: 4 4; }
+      .leak { stroke: var(--bad); }
+      .deep { background: var(--deep); border: 1px solid var(--deep-edge); }
+      .hatch {
+        background-image: repeating-linear-gradient(
+          45deg, var(--line) 0 6px, var(--panel) 6px 12px
+        );
+      }
+      /* Mermaid's classDef and linkStyle reject var(), so they carry geometry
+         only and colour lands here: `class X,Y leak` marks a leaking node,
+         a dotted edge (-.->) is a leaking edge. */
+      .mermaid .leak rect,
+      .mermaid .leak circle,
+      .mermaid .leak polygon,
+      .mermaid .leak path { stroke: var(--bad) !important; }
+      .mermaid path.edge-pattern-dotted { stroke: var(--bad) !important; }
+      /* Typography only. Each label carries its own fill="var(--…)". */
+      .lbl {
+        font: 600 9px ui-sans-serif, system-ui;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              page: "var(--page)",
+              card: "var(--card)",
+              panel: "var(--panel)",
+              line: "var(--line)",
+              ink: "var(--ink)",
+              muted: "var(--muted)",
+              deep: "var(--deep)",
+              good: "var(--good)",
+              "good-bg": "var(--good-bg)",
+              warn: "var(--warn)",
+              "warn-bg": "var(--warn-bg)",
+              bad: "var(--bad)",
+              "bad-bg": "var(--bad-bg)",
+            },
+          },
+        },
+      };
+    </script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      const v = (n) =>
+        getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+      mermaid.initialize({
+        startOnLoad: true,
+        securityLevel: "loose",
+        theme: "base",
+        themeVariables: {
+          background: v("--card"),
+          primaryColor: v("--panel"),
+          primaryTextColor: v("--ink"),
+          primaryBorderColor: v("--line"),
+          lineColor: v("--muted"),
+          secondaryColor: v("--panel"),
+          tertiaryColor: v("--card"),
+        },
+      });
+    </script>
+  </head>
+  <body class="bg-page text-ink font-sans">
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+      <!-- Repo name, date, compact legend. No introduction paragraph. -->
+      <header>...</header>
+      <!-- One <article> per candidate. -->
+      <section id="candidates" class="space-y-10">...</section>
+      <section id="top-recommendation">...</section>
+    </main>
+  </body>
+</html>
