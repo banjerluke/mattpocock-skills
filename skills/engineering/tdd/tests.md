@@ -39,10 +39,10 @@ Red flags:
 
 - Mocking internal collaborators
 - Testing private methods
-- Asserting on call counts/order
+- Asserting internal call counts or order that are not themselves the requirement
 - Test breaks when refactoring without behavior change
 - Test name describes HOW not WHAT
-- Verifying through external means instead of interface
+- Verifying through a side channel when the interface shows the outcome. When the effect at a boundary is the contract (a durable write, a request, a native bridge call), assert what crossed the boundary, with its arguments.
 
 ```typescript
 // BAD: Bypasses interface to verify
@@ -59,6 +59,8 @@ test("createUser makes user retrievable", async () => {
   expect(retrieved.name).toBe("Alice");
 });
 ```
+
+Where persistence itself is the contract, such as an offline queue that must survive a reload, read back from the store.
 
 **Tautological tests**: Expected value restates the implementation, so the test passes by construction.
 
