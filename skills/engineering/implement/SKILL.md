@@ -10,6 +10,6 @@ Use /tdd for behaviour the work adds or changes, at pre-agreed seams. Work that 
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 
-Once done, use /code-review to review the work.
+Once done, review the work with the project's `review` skill when the project has one (a `review` skill in its `.claude/skills/` or `.agents/skills/`), and with /code-review otherwise.
 
 Commit your work to the current branch.
